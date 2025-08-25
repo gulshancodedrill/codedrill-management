@@ -12,30 +12,28 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Env files (keep secrets out of git)
+# Env files
 .env
 .env.local
 .env.*.local
 
 # -------------------------
-# Node.js / Backend
+# Backend (Node.js)
 # -------------------------
-/node_modules
-/dist
-/build
-/cache
-.tmp
-coverage/
-*.pid
-*.seed
-*.pid.lock
+/backend/node_modules
+/backend/dist
+/backend/build
+/backend/cache
+/backend/tmp
+/backend/coverage
 
 # -------------------------
-# React / Frontend
+# Frontend (React)
 # -------------------------
 /frontend/node_modules
 /frontend/build
 /frontend/dist
+/frontend/.cache
 
 # -------------------------
 # Editor / IDE
@@ -52,4 +50,3 @@ coverage/
 *.tgz
 *.tar.gz
 *.zip
-
