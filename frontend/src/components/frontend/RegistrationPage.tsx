@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import bg from "../../assets/images/bg.jpg";
+import { Link } from "react-router-dom";
 
 export default function RegistrationPage() {
   const [step, setStep] = useState(1);
@@ -119,7 +120,7 @@ export default function RegistrationPage() {
         </div>
 
         {/* Right side form */}
-        <div className="backdrop-blur-md bg-slate-200 border border-slate-200 shadow-xl rounded-xl w-full max-w-md p-6 ring-1 ring-black/5">
+        <div className="backdrop-blur-md bg-white/5 border border-slate-200 shadow-xl rounded-xl w-full max-w-md p-6 ring-1 ring-black/5">
           <h2 className="text-xl font-bold mb-4 text-black">
             {step === 1
               ? "Personal Details"
@@ -374,7 +375,7 @@ export default function RegistrationPage() {
                 <button
                   type="button"
                   onClick={() => setStep((prev) => prev - 1)}
-                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg"
+                  className="bg-gray-300  cursor-pointer hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg"
                 >
                   Back
                 </button>
@@ -383,19 +384,25 @@ export default function RegistrationPage() {
                 <button
                   type="button"
                   onClick={() => setStep((prev) => prev + 1)}
-                  className="ml-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg"
+                  className="ml-auto bg-[#1D1D99] cursor-pointer  hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg"
                 >
                   Next
                 </button>
               ) : (
                 <button
                   type="submit"
-                  className="ml-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg"
+                  className="ml-auto bg-[#ef78d3] cursor-pointer hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg"
                 >
                   Submit
                 </button>
+                
               )}
+              
             </div>
+            <div className="text-center text-sm font-semibold text-slate-600">
+                
+                Already have an account? <Link to={"/login"}  className="underline text-[#1D1D99] cursor-pointer font-bold">Login</Link> 
+              </div>
           </form>
         </div>
       </div>
