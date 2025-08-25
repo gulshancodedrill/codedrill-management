@@ -5,6 +5,7 @@ import Dashboard from "./components/admin/Dashboard";
 import HomePage from "./components/frontend/HomePage";
 import RegistrationPage from "./components/frontend/RegistrationPage";
 import Layout from "./components/common/Layout";
+import LoginPage from "./components/frontend/LoginPage";
 
 export default function App() {
   return (
@@ -13,7 +14,8 @@ export default function App() {
         {/* Frontend Layout */}
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="registration" element={<RegistrationPage />} />
+          <Route path="/register" element={<RegistrationPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Route>
 
         {/* Admin routes (can have their own layout later) */}
