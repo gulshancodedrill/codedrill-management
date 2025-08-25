@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Home,
   Users,
@@ -8,7 +8,27 @@ import {
   LogOut,
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
 export default function Dashboard(){
+    const navigate = useNavigate();
+    const [data, setData] = useState<any>(null);
+    const [loading,setLoading] = useState(true);
+
+    useEffect(()=>{
+      const token = localStorage.getItem("token");
+      if(!token){
+        navigate("login");
+        return;
+      }
+
+      const fetchData = async () => {
+        
+
+      };
+
+    },[navigate]);
+
     const [sidebarOpen, setSidebarOpen] = useState(true);
     return (
         <div className="flex h-screen bg-gray-100">

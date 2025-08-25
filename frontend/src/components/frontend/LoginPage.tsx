@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bg from "../../assets/images/bg.jpg";
+import axios from "axios";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -18,10 +22,28 @@ export default function LoginPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // ✅ Make async so we can use await
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login Submitted ✅", formData);
-    // Add authentication logic here
+    setError("");
+    setLoading(true);
+
+    try {
+      // ✅ Use axios (simpler)
+      const res = await axios.post("http://localhost:5000/api/login", formData);
+
+      // Save token to localStorage
+      localStorage.setItem("token", res.data.token);
+
+      console.log("✅ Logged in, token saved:", res.data.token);
+
+      // Redirect after login
+      navigate("/admin/dashboard");
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Login failed ❌");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,7 +63,6 @@ export default function LoginPage() {
             Welcome Back to{" "}
             <span className="text-[#1D1D99] font-bold">Codedrill Infotech</span>
           </h1>
-
           <div className="text-lg text-black text-center font-medium flex justify-center">
             Please login to your account
           </div>
@@ -81,12 +102,17 @@ export default function LoginPage() {
               />
             </div>
 
+            {error && (
+              <p className="text-red-600 text-sm font-medium">{error}</p>
+            )}
+
             <div className="pt-4 flex justify-between items-center">
               <button
                 type="submit"
+                disabled={loading}
                 className="bg-[#1D1D99] hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg w-full"
               >
-                Login
+                {loading ? "Logging in..." : "Login"}
               </button>
             </div>
 
